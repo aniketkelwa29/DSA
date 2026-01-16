@@ -362,7 +362,7 @@ class S1_Singly_Linkedlist {
                     💡 Tip: Use the number keys to choose your action!
                     ✨ Thank you for using the Singly Linked List Program! ✨
                     --------------------------------------------------
-                            Created with ❤️  by Your Java Program
+                            Created with ❤️  by a Java Program
                     ==================================================
                     """);
 
