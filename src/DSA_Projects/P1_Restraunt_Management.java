@@ -1,11 +1,10 @@
 package DSA_Projects;
 
-
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import static java.awt.SystemColor.menu;
 
 class TokenSystem {
     int customersData;
@@ -13,7 +12,6 @@ class TokenSystem {
     TokenSystem rear = null;
     TokenSystem next = null;
     int count = 1;
-
     TokenSystem(int customersData) {
         this.customersData = customersData;
     }
@@ -87,39 +85,41 @@ class OrderHistory {
 
 class Dishes {
 
-    HashMap<String, Integer> Menu = new HashMap<>();
+    HashMap<String, Integer> breakfast = new HashMap<>();
+    HashMap<String, Integer> lunch = new HashMap<>();
+    HashMap<String, Integer> dinner = new HashMap<>();
     Scanner sc = new Scanner(System.in);
 
     public void menu() {
 
         System.out.println("----------BREAKFAST MENU-----------");
-        Menu.put("Idli", 60);
-        Menu.put("Dosa", 70);
-        Menu.put("Poha", 25);
-        Menu.put("Samosa", 25);
+        breakfast.put("Idli", 60);
+        breakfast.put("Dosa", 70);
+        breakfast.put("Poha", 25);
+        breakfast.put("Samosa", 25);
 
-        for (Map.Entry<String, Integer> n : Menu.entrySet()) {
+        for (Map.Entry<String, Integer> n : breakfast.entrySet()) {
             System.out.println(n.getKey() + " -> " + n.getValue());
         }
         System.out.println("----------LUNCH MENU-----------");
-        Menu.put("Veg Thali", 80);
-        Menu.put("Daal Rice", 65);
-        Menu.put("Paneer curry", 109);
-        for (Map.Entry<String, Integer> m : Menu.entrySet()) {
+        lunch.put("Veg Thali", 80);
+        lunch.put("Daal Rice", 65);
+        lunch.put("Paneer curry", 109);
+        for (Map.Entry<String, Integer> m : lunch.entrySet()) {
             System.out.println(m.getKey() + " -> " + m.getValue());
         }
         System.out.println("----------DINNER MENU-----------");
-        Menu.put("sabzi & chapati", 70);
-        Menu.put("Fried rice ", 65);
-        Menu.put("Veg Biryani", 109);
-        for (Map.Entry<String, Integer> o : Menu.entrySet()) {
+        dinner.put("sabzi & chapati", 70);
+        dinner.put("Fried rice", 65);
+        dinner.put("Veg Biryani", 109);
+        for (Map.Entry<String, Integer> o : dinner.entrySet()) {
             System.out.println(o.getKey() + " -> " + o.getValue());
         }
     }
 
     public void orders() {
         HashMap<String, Integer> order = new HashMap<>();
-
+        int orderId = 0;
         System.out.println("Enter the number of items you want to order : ");
         int n = sc.nextInt();
         sc.nextLine();
@@ -134,7 +134,9 @@ class Dishes {
 
 
             order.put(dish, order.getOrDefault(dish, 0) + quantity);
+            orderId++;
         }
+
         for (Map.Entry<String, Integer> entry : order.entrySet()) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
@@ -147,34 +149,37 @@ class Dishes {
         for (Map.Entry<String, Integer> item : bill.entrySet()) {
             String dish = item.getKey();
             int quantity = item.getValue();
-            if (Menu.containsKey(dish)) {
-                int price = Menu.get(dish);
+            if (breakfast.containsKey(dish)) {
+                int price = breakfast.get(dish);
                 int total = price * quantity;
                 grandTotal += total;
                 System.out.println(dish + " | ₹" + price + " x " + quantity + " = ₹" + total);
-            } else {
+            }
+           else if (lunch.containsKey(dish)) {
+                int price = lunch.get(dish);
+                int total = price * quantity;
+                grandTotal += total;
+                System.out.println(dish + " | ₹" + price + " x " + quantity + " = ₹" + total);
+            }
+            else if (dinner.containsKey(dish)) {
+                int price = dinner.get(dish);
+                int total = price * quantity;
+                grandTotal += total;
+                System.out.println(dish + " | ₹" + price + " x " + quantity + " = ₹" + total);
+            }
+
+            else {
                 System.out.println(dish + " : Not Available");
             }
         }
         System.out.println("-----------------------------");
         System.out.println("Grand Total: ₹" + grandTotal);
     }
-
 }
-
-class Manager {
-
-}
-
-
 public class P1_Restraunt_Management {
     public static void main(String[] args) {
-        int bill = 00;
-        OrderHistory or = new OrderHistory(bill);
-
-        or.History(8231);
-        or.History(98737);
-        
-        or.getHistory();
+    Dishes d= new Dishes();
+    d.menu();
+    d.orders();
     }
 }
