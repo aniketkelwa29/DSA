@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import static java.lang.System.exit;
-
-
 class TokenSystem {
     int tokenNumber;
     TokenSystem front = null;
@@ -44,15 +41,6 @@ class TokenSystem {
         System.out.println("order served at the table number : " + front.tokenNumber);
         front = front.next;
         count--;
-    }
-
-    void getTokens() {
-        TokenSystem current = front;
-        while (current != rear.next) {
-            System.out.print(current.tokenNumber + " -> ");
-            current = current.next;
-        }
-        System.out.println("null");
     }
 
     void firstToServe() {
@@ -207,7 +195,6 @@ class Dishes {
         else if (choice.equals("no")){
             System.out.println("!! Thankyou for having a meal !!");
         }
-
 //        restraunt.Reception();
     }
 
@@ -217,20 +204,27 @@ class Restraunt {
     Dishes dishes = new Dishes();
     Scanner sc = new Scanner(System.in);
 
-    public void orderConfirmation() {
+    public void orderConfirmation()
+    {
         System.out.println("Do you want to order something from this menu  :- yes/no ");
         String m = sc.nextLine();
-        if (m.equals("yes")) {
+        if (m.equals("yes"))
+        {
 
             dishes.orders();
 
-        } else if (m.equals("no")) {
+        }
+        else if (m.equals("no"))
+        {
             System.out.println("!! Thankyou for visiting !!");
-        } else {
+        }
+        else
+        {
             System.out.println("!! Invalid Input !!");
         }
     }
-    public void Reception() {
+    public void Reception()
+    {
 
         Restraunt restraunt = new Restraunt();
         System.out.println("!!----Welcome to our Restraunt----!!");
@@ -240,7 +234,8 @@ class Restraunt {
         do {
             System.out.println("Do you wants to have a meal :  yes/no : ");
             String userChoice = sc.nextLine().trim();
-            if (userChoice.equals("yes")) {
+            if (userChoice.equals("yes"))
+            {
 
                 Boolean r = false;
                 do {
@@ -249,27 +244,38 @@ class Restraunt {
                             "\n " + "----------LUNCH----------- " +
                             "\n" + "----------DINNER-----------  ");
                     String c = sc.nextLine();
-                    if (c.equals("breakfast")) {
+                    if (c.equals("breakfast"))
+                    {
                         dishes.breakfastMenu();
                         restraunt.orderConfirmation();
                         r = true;
-                    } else if (c.equals("lunch")) {
+                    }
+                    else if (c.equals("lunch"))
+                    {
                         dishes.lunchMenu();
                         orderConfirmation();
                         r = true;
-                    } else if (c.equals("dinner")) {
+                    }
+                    else if (c.equals("dinner"))
+                    {
                         dishes.dinnerMenu();
                         orderConfirmation();
                         r = true;
-                    } else {
+                    }
+                    else
+                    {
                         System.out.println("! Invalid Input !");
                     }
                 } while (r != true);
                 b = true;
-            } else if (userChoice.equals("no")) {
+            }
+            else if (userChoice.equals("no"))
+            {
                 System.out.println("!! Thankyou - visit Again !!");
                 b = true;
-            } else {
+            }
+            else
+            {
                 System.out.println("userInput is not valid ");
             }
         } while (b != true);
