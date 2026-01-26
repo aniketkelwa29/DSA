@@ -11,11 +11,10 @@ class TreeNode {
         this.right = null;
     }
 }
-
 class BST {
     TreeNode root;
 
-
+int count=0;
     public void insert(int data)
     {
         TreeNode newNode = new TreeNode(data);
@@ -60,6 +59,48 @@ class BST {
             treeTraversal(node.right);
         }
     }
+    public boolean search(int target,TreeNode root){
+
+
+        if(root == null){
+            System.out.println("Target not found on traversing "+count +" nodes." );
+            return false;
+        }
+
+        if(root.data == target)
+        {
+            System.out.println("Target found on traversing "+count +" nodes." );
+            System.out.println("Target found "+target);
+            return true;
+        }
+        else if (root.data<target)
+        {
+            count++;
+           return search(target,root.right);
+        }
+        else
+        {
+            count++;
+            return search(target,root.left);
+        }
+    }
+    public int hieghtMeasurment(TreeNode root){
+
+        if(root == null)
+        {
+            return -1;
+        }
+       return Math.max(hieghtMeasurment(root.left),hieghtMeasurment(root.right))+1;
+    }
+    public void deletion(){
+        if(root == null){
+            System.out.println("No any element present at the root node: ");
+            return;
+        }
+        if(root.left == null){
+
+        }
+    }
 }
 public class BinarySearchTree_Without_Recursion {
     public static void main(String[] args) {
@@ -71,7 +112,11 @@ public class BinarySearchTree_Without_Recursion {
         bst.insert(8);
         bst.insert(23);
         bst.insert(16);
+        bst.insert(19);
         bst.treeTraversal(bst.root);
+        bst.search(16,bst.root);
+
+        System.out.println("hieght of the tree is "+bst.hieghtMeasurment(bst.root));
 
     }
 }
