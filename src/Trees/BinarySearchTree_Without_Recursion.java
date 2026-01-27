@@ -92,18 +92,69 @@ int count=0;
         }
        return Math.max(hieghtMeasurment(root.left),hieghtMeasurment(root.right))+1;
     }
-    public void deletion(){
-        if(root == null){
-            System.out.println("No any element present at the root node: ");
-            return;
+    public TreeNode deletion(TreeNode node,int data){
+        if(node == null)
+        {
+            return null;
         }
-        if(root.left == null){
+        if(data<node.data)
+        {
+            node.left = deletion(node.left,data);
+        }
+        else if (data>node.data)
+        {
+            node.right = deletion(node.right,data);
+        }
+
+        else
+        {
+            if (node.left == null)
+            {
+                return node.right;
+            }
+            else if (node.right == null)
+            {
+                return node.left;
+            }
+
+            TreeNode successor = minValue(node.right);
+            node.data = successor.data;
+            node.right = deletion(node.right, successor.data);
+        }
+        return node;
+    }
+
+    public TreeNode minValue(TreeNode node)
+    {
+        TreeNode current = node;
+        while(current.left!=null)
+        {
+            current = current.left;
+        }
+        return current;
+    }
+
+    public TreeNode maxValue(TreeNode node){
+        TreeNode current = node;
+        while(current.right!=null)
+        {
+            current = current.right;
+        }
+        return current;
+    }
+
+    public TreeNode LCA(TreeNode node,int n1,int n2)
+    {
+        if(node == null){
 
         }
+        return
     }
 }
-public class BinarySearchTree_Without_Recursion {
-    public static void main(String[] args) {
+public class BinarySearchTree_Without_Recursion
+{
+    public static void main(String[] args)
+    {
         BST bst = new BST();
         bst.insert(10);
         bst.insert(20);
@@ -115,7 +166,9 @@ public class BinarySearchTree_Without_Recursion {
         bst.insert(19);
         bst.treeTraversal(bst.root);
         bst.search(16,bst.root);
-
+         bst.deletion(bst.root,20);
+         bst.deletion(bst.root,6);
+        bst.treeTraversal(bst.root);
         System.out.println("hieght of the tree is "+bst.hieghtMeasurment(bst.root));
 
     }
