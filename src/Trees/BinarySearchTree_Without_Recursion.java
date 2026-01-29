@@ -142,13 +142,20 @@ int count=0;
         }
         return current;
     }
-
     public TreeNode LCA(TreeNode node,int n1,int n2)
     {
         if(node == null){
-
+              return node;
         }
-        return
+        if (node.data>n1 && node.data> n2 ) {
+                return LCA(node.left,n1, n2 );
+        }
+
+        if (node.data <n1 && node.data <n2){
+           return  LCA(node.right,n1,n2);
+        }
+        return node;
+
     }
 }
 public class BinarySearchTree_Without_Recursion
@@ -166,10 +173,14 @@ public class BinarySearchTree_Without_Recursion
         bst.insert(19);
         bst.treeTraversal(bst.root);
         bst.search(16,bst.root);
-         bst.deletion(bst.root,20);
-         bst.deletion(bst.root,6);
+        bst.deletion(bst.root,20);
+        bst.deletion(bst.root,6);
         bst.treeTraversal(bst.root);
+
+        System.out.println("maxValue in the tree is " +bst.maxValue(bst.root).data);
+        System.out.println("minValue in the tree is "+bst.minValue(bst.root).data);
         System.out.println("hieght of the tree is "+bst.hieghtMeasurment(bst.root));
+        System.out.println(bst.LCA(bst.root, 4,8).data);
 
     }
 }
