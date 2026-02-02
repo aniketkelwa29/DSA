@@ -116,7 +116,6 @@ int count=0;
             {
                 return node.left;
             }
-
             TreeNode successor = minValue(node.right);
             node.data = successor.data;
             node.right = deletion(node.right, successor.data);
@@ -142,6 +141,7 @@ int count=0;
         }
         return current;
     }
+
     public TreeNode LCA(TreeNode node,int n1,int n2)
     {
         if(node == null){
@@ -157,6 +157,26 @@ int count=0;
         return node;
 
     }
+    public TreeNode leftRotation(TreeNode x){
+        TreeNode y = x.right;
+         x.right = y.left  ;
+         y.left =x;
+        return y;
+    }
+    public TreeNode rightRotation(TreeNode x){
+        TreeNode y= x.left;
+        x.left = y.right;
+        y.right = x;
+        return y;
+    }
+    public TreeNode rightLeftRotation(TreeNode x){
+    x.right = rightRotation(x.right);
+    return leftRotation(x);
+    }
+    public TreeNode leftRightRotation(TreeNode x){
+        x.left = leftRotation(x.left);
+        return rightRotation(x);
+    }
 }
 public class BinarySearchTree_Without_Recursion
 {
@@ -164,23 +184,23 @@ public class BinarySearchTree_Without_Recursion
     {
         BST bst = new BST();
         bst.insert(10);
-        bst.insert(20);
-        bst.insert(6);
-        bst.insert(4);
-        bst.insert(8);
-        bst.insert(23);
-        bst.insert(16);
-        bst.insert(19);
+        bst.insert(5);
+        bst.insert(9);
         bst.treeTraversal(bst.root);
         bst.search(16,bst.root);
-        bst.deletion(bst.root,20);
-        bst.deletion(bst.root,6);
+//        bst.deletion(bst.root,20);
         bst.treeTraversal(bst.root);
-
+//        bst.root =   bst.leftRotation(bst.root);
+//        bst.root = bst.rightRotation(bst.root);
+//        bst.root = bst.rightLeftRotation(bst.root);
+        bst.root = bst.leftRightRotation(bst.root);
+        System.out.println("-----"+bst.root.data+"-----");
+        System.out.println("-----"+bst.root.left.data+"-----");
+        System.out.println("-----"+bst.root.right.data+"-----");
         System.out.println("maxValue in the tree is " +bst.maxValue(bst.root).data);
         System.out.println("minValue in the tree is "+bst.minValue(bst.root).data);
         System.out.println("hieght of the tree is "+bst.hieghtMeasurment(bst.root));
-        System.out.println(bst.LCA(bst.root, 4,8).data);
+        System.out.println(bst.LCA(bst.root, 5,9).data);
 
     }
 }
